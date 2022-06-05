@@ -1,0 +1,25 @@
+{
+  "name": "vite-plugin-fastly-react-ssr-example",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build && compute-js-static-publish publish-content --local",
+    "preview": "fastly compute serve --file ./dist/ssr/app.wasm",
+    "deploy": "compute-js-static-publish publish-content && fastly compute pack -w ./dist/ssr/app.wasm && fastly compute deploy"
+  },
+  "devDependencies": {
+    "@fastly/compute-js-static-publish": "^7.0.4",
+    "@fastly/js-compute": "^3.38.2",
+    "@vitejs/plugin-react": "^5.1.3",
+    "vite": "^7.3.1",
+    "vite-plugin-fastly": "0.0.0"
+  },
+  "dependencies": {
+    "@fastly/cli": "^13.3.0",
+    "@types/react": "^19.2.10",
+    "@types/react-dom": "^19.2.3",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  }
+}

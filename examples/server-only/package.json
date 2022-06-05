@@ -1,0 +1,19 @@
+{
+  "name": "vite-plugin-fastly-server-only-example",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "fastly compute serve --file ./dist/app.wasm",
+    "deploy": "fastly compute pack -w ./dist/app.wasm && fastly compute deploy"
+  },
+  "devDependencies": {
+    "@fastly/js-compute": "^3.38.2",
+    "vite": "^7.3.1",
+    "vite-plugin-fastly": "0.0.0"
+  },
+  "dependencies": {
+    "@fastly/cli": "^13.3.0"
+  }
+}

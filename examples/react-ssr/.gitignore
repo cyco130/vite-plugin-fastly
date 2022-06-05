@@ -1,0 +1,5 @@
+node_modules/
+dist/
+__input_bundled.js.map
+static-publisher/
+pkg/

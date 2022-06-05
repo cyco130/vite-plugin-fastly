@@ -1,0 +1,60 @@
+{
+  "name": "vite-plugin-fastly",
+  "version": "0.0.0",
+  "type": "module",
+  "files": [
+    "dist",
+    "*.d.ts"
+  ],
+  "exports": {
+    ".": "./dist/plugin.js",
+    "./runner": "./dist/runner.js",
+    "./types": "./types.d.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "dist/*.d.ts"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "tsup --clean",
+    "dev": "tsup --watch",
+    "prepack": "rm -rf dist && pnpm build",
+    "test": "pnpm run /^test:/",
+    "test:unit": "vitest run",
+    "test:typecheck": "tsc -p tsconfig.json --noEmit",
+    "test:lint": "eslint . --max-warnings 0 --ignore-pattern dist --no-warn-ignored",
+    "test:package": "publint"
+  },
+  "description": "vite-plugin-fastly",
+  "license": "MIT",
+  "repository": "github:cyco130/vite-plugin-fastly",
+  "keywords": [
+    "react",
+    "vite",
+    "nextjs",
+    "ssr"
+  ],
+  "peerDependencies": {
+    "@fastly/js-compute": "3",
+    "vite": "7"
+  },
+  "devDependencies": {
+    "@cyco130/eslint-config": "^6.1.1",
+    "@fastly/cli": "^13.3.0",
+    "@fastly/js-compute": "^3.38.2",
+    "@types/node": "^25.0.7",
+    "eslint": "^9.39.2",
+    "publint": "^0.3.16",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "vitest": "^4.0.17"
+  },
+  "dependencies": {
+    "http-proxy-3": "^1.23.2",
+    "tree-kill-promise": "^5.0.0"
+  }
+}

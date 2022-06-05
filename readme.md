@@ -1,0 +1,1 @@
+packages/vite-plugin-fastly/readme.md

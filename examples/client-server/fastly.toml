@@ -1,0 +1,23 @@
+# This file describes a Fastly Compute package. To learn more visit:
+# https://www.fastly.com/documentation/reference/compute/fastly-toml
+
+authors = []
+description = ""
+language = "javascript"
+manifest_version = 3
+name = "vite-plugin-fastly-client-server-example"
+service_id = ""
+
+[local_server]
+
+[local_server.kv_stores]
+
+[local_server.kv_stores.client-server-site-content]
+file = "./static-publisher/kvstore.json"
+format = "json"
+
+[setup]
+
+[setup.kv_stores]
+
+[setup.kv_stores.client-server-site-content]

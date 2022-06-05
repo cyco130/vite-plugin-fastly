@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"noEmit": true,
+		"module": "preserve",
+		"moduleResolution": "bundler"
+	},
+	"references": [
+		{ "path": "./tsconfig.plugin.json" },
+		{ "path": "./tsconfig.runner.json" }
+	],
+	"files": []
+}
