@@ -23,7 +23,6 @@
     "dev": "tsup --watch",
     "prepack": "rm -rf dist && pnpm build",
     "test": "pnpm run /^test:/",
-    "test:unit": "vitest run",
     "test:typecheck": "tsc -p tsconfig.json --noEmit",
     "test:lint": "eslint . --max-warnings 0 --ignore-pattern dist --no-warn-ignored",
     "test:package": "publint"
@@ -50,8 +49,7 @@
     "publint": "^0.3.16",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "vite": "^7.3.1",
-    "vitest": "^4.0.17"
+    "vite": "^7.3.1"
   },
   "dependencies": {
     "http-proxy-3": "^1.23.2",
