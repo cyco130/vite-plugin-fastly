@@ -1,41 +1,51 @@
-import type { Plugin, UserConfig } from "vite";
+import type { ConfigEnv, Plugin, UserConfig, UserConfigExport } from "vite";
 import { fastly } from "vite-plugin-fastly";
-import { rm } from "fs/promises";
+import fs from "fs";
 
-export default {
-	// This setting prevents Vite from serving index.html automatically.
-	appType: "custom",
-	// Configure both client and SSR environments.
-	environments: {
-		client: {
-			build: {
-				// Enable manifest generation for client build.
-				manifest: true,
-				outDir: "dist/client",
-				rollupOptions: {
-					input: "src/entry.client.ts",
+export default (env: ConfigEnv) => {
+	// We have to create an empty KV store file for the local Fastly server
+	if (env.command === "serve") {
+		fs.mkdirSync("static-publisher");
+		fs.writeFileSync("static-publisher/kvstore.json", "{}", {
+			encoding: "utf-8",
+		});
+	}
+
+	return {
+		// This setting prevents Vite from serving index.html automatically.
+		appType: "custom",
+		// Configure both client and SSR environments.
+		environments: {
+			client: {
+				build: {
+					// Enable manifest generation for client build.
+					manifest: true,
+					outDir: "dist/client",
+					rollupOptions: {
+						input: "src/entry.client.ts",
+					},
+				},
+			},
+			ssr: {
+				build: {
+					outDir: "dist/ssr",
+					rollupOptions: {
+						input: "src/entry.fastly.ts",
+					},
 				},
 			},
 		},
-		ssr: {
-			build: {
-				outDir: "dist/ssr",
-				rollupOptions: {
-					input: "src/entry.fastly.ts",
-				},
+		// Build both environments, client first.
+		builder: {
+			async buildApp(builder) {
+				await fs.promises.rm("dist", { recursive: true, force: true });
+				await builder.build(builder.environments.client);
+				await builder.build(builder.environments.ssr);
 			},
 		},
-	},
-	// Build both environments, client first.
-	builder: {
-		async buildApp(builder) {
-			await rm("dist", { recursive: true, force: true });
-			await builder.build(builder.environments.client);
-			await builder.build(builder.environments.ssr);
-		},
-	},
-	plugins: [fastly(), resolveClientManifest()],
-} satisfies UserConfig;
+		plugins: [fastly(), resolveClientManifest()],
+	} satisfies UserConfigExport;
+};
 
 // This mini plugin resolves the client manifest file path
 // while building the SSR environment so that the server code

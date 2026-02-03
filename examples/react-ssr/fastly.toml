@@ -8,10 +8,7 @@ manifest_version = 3
 name = "vite-plugin-fastly-react-ssr-example"
 service_id = ""
 
-[local_server]
-
-[local_server.kv_stores]
-
 [local_server.kv_stores.react-ssr-site-content]
 file = "./static-publisher/kvstore.json"
 format = "json"
+create = true
