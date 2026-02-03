@@ -1,6 +1,8 @@
 packages:
   - packages/*
   - examples/*
+  - ci
 
 onlyBuiltDependencies:
   - esbuild
+  - puppeteer

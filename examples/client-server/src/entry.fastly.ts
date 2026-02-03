@@ -61,7 +61,7 @@ function getHtml() {
 		${injectToHead}
 	</head>
 	<body>
-		<h1>Hello from Fastly and Vite Client-Server Example</h1>
+		<h1>vite-plugin-fastly</h1>
 		<button id="count-button">Count: 0</button>
 		<script type="module" src=${escapedEntry}></script>
 	</body>

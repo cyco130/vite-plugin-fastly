@@ -1,0 +1,15 @@
+{
+  "name": "ci-react-vite-plugin-mdx",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "ci": "vitest --reporter=verbose run"
+  },
+  "dependencies": {
+    "puppeteer": "^24.34.0",
+    "tree-kill-promise": "^5.0.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.16",
+    "@types/node": "^20.19.27"
+  }
+}
