@@ -1,8 +1,11 @@
 /// <reference types="vite/client" />
 /// <reference types="vite-plugin-fastly/types" />
 
+// This virtual module provides information about the current Vite environment
 import { command } from "vite-plugin-fastly:environment";
+// This special module provides information about the built client files
 import clientManifest from "vite-client-manifest";
+// This module helps serve static assets published via Fastly Compute JS Static Publish
 import { PublisherServer } from "@fastly/compute-js-static-publish";
 
 import rc from "../static-publish.rc";

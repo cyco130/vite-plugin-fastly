@@ -1,14 +1,17 @@
 /// <reference types="vite/client" />
 /// <reference types="vite-plugin-fastly/types" />
 
+// This virtual module provides information about the current Vite environment
 import { command } from "vite-plugin-fastly:environment";
 
+// Default export your handler to be imported by the remote module runner in development (command === "serve")
 export default function handler(event: FetchEvent) {
 	return new Response(HTML, {
 		headers: { "Content-Type": "text/html" },
 	});
 }
 
+// In production (command !== "serve"), register the fetch event listener
 if (command !== "serve") {
 	addEventListener("fetch", (event) => {
 		event.respondWith(handler(event));
