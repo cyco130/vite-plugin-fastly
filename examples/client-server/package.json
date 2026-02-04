@@ -12,7 +12,7 @@
     "@fastly/compute-js-static-publish": "^7.0.4",
     "@fastly/js-compute": "^3.38.2",
     "vite": "^7.3.1",
-    "vite-plugin-fastly": "0.0.0"
+    "vite-plugin-fastly": "0.0.1"
   },
   "dependencies": {
     "@fastly/cli": "^13.3.0"

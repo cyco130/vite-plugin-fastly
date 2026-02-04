@@ -54,7 +54,7 @@ importers:
         specifier: ^7.3.1
         version: 7.3.1(@types/node@25.0.7)(terser@5.44.1)(yaml@2.8.2)
       vite-plugin-fastly:
-        specifier: 0.0.0
+        specifier: workspace:0.0.1
         version: link:../../packages/vite-plugin-fastly
 
   examples/react-ssr:
@@ -88,7 +88,7 @@ importers:
         specifier: ^7.3.1
         version: 7.3.1(@types/node@25.0.7)(terser@5.44.1)(yaml@2.8.2)
       vite-plugin-fastly:
-        specifier: 0.0.0
+        specifier: workspace:0.0.1
         version: link:../../packages/vite-plugin-fastly
 
   examples/server-only:
@@ -104,7 +104,7 @@ importers:
         specifier: ^7.3.1
         version: 7.3.1(@types/node@25.0.7)(terser@5.44.1)(yaml@2.8.2)
       vite-plugin-fastly:
-        specifier: 0.0.0
+        specifier: workspace:0.0.1
         version: link:../../packages/vite-plugin-fastly
 
   packages/vite-plugin-fastly:
