@@ -31,10 +31,14 @@
   "license": "MIT",
   "repository": "github:cyco130/vite-plugin-fastly",
   "keywords": [
-    "react",
     "vite",
-    "nextjs",
-    "ssr"
+    "vite-plugin",
+    "fastly",
+    "fastly-compute",
+    "compute-at-edge",
+    "viceroy",
+    "edge-computing",
+    "serverless"
   ],
   "peerDependencies": {
     "@fastly/js-compute": "3",
