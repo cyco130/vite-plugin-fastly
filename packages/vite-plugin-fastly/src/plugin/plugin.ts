@@ -3,7 +3,7 @@ import { createProxy, type ServerOptions } from "http-proxy-3";
 import type { IncomingMessage } from "node:http";
 import fs from "node:fs";
 import { ChildProcess, execSync, spawn } from "node:child_process";
-import { getRecursiveChildProcesses, killProcesses } from "kill-em-all";
+import { launchAndTest, type LaunchAndTestCleanupFunction } from "kill-em-all";
 import exposeEnvironment from "./expose-environment";
 
 export interface FastlyPluginOptions {
@@ -56,7 +56,7 @@ export interface FastlyPluginOptions {
 }
 
 // Map of uniqueName to Fastly Dev Server child processes
-const fastlyProcesses = new Map<string, number[]>();
+const fastlyProcesses = new Map<string, LaunchAndTestCleanupFunction>();
 
 export function fastly(options: FastlyPluginOptions = {}): Plugin[] {
 	const {
@@ -234,47 +234,12 @@ export function fastly(options: FastlyPluginOptions = {}): Plugin[] {
 				this.info(`[${uniqueName}] ${launchCommand}`);
 				const fastlyDevServerProcess = await spawnCommand(launchCommand);
 
-				fastlyProcesses.set(uniqueName, [fastlyDevServerProcess.pid!]);
-
-				// Wait until server is ready
-				await new Promise<void>((resolve, reject) => {
-					const checkInterval = 500;
-					const maxAttempts = 60; // 30 seconds
-					let attempts = 0;
-
-					const interval = setInterval(async () => {
-						attempts++;
-						if (attempts > maxAttempts) {
-							clearInterval(interval);
-							reject(
-								new Error(
-									`[${uniqueName}] Fastly Dev Server did not become ready in time.`,
-								),
-							);
-							return;
-						}
-
-						try {
-							const response = await fetch(
-								`http://${fastlyDevServerAddress}/@vite-plugin-fastly/ready`,
-							);
-							if (response.ok) {
-								clearInterval(interval);
-								resolve();
-							}
-						} catch {
-							// Ignore errors, server is not ready yet
-						}
-					}, checkInterval);
-				}).catch(async (error) => {
-					await doKillProcesses(this, uniqueName);
-					throw error;
-				});
-
-				fastlyProcesses.set(
-					uniqueName,
-					await getRecursiveChildProcesses(fastlyDevServerProcess.pid!),
+				const kill = await launchAndTest(
+					fastlyDevServerProcess,
+					`http://${fastlyDevServerAddress}/@vite-plugin-fastly/ready`,
 				);
+
+				fastlyProcesses.set(uniqueName, kill);
 
 				this.info(
 					`[${uniqueName}] Fastly Dev Server is running at http://${fastlyDevServerAddress}`,
@@ -509,14 +474,13 @@ async function doKillProcesses(
 	},
 	name: string,
 ) {
-	const proc = fastlyProcesses.get(name);
-	if (!proc) return;
+	const kill = fastlyProcesses.get(name);
+	if (!kill) return;
 
 	fastlyProcesses.delete(name);
 
 	ctx.info(`[${name}] Shutting down Fastly dev server`);
-	await killProcesses(proc, "SIGINT");
-
+	await kill();
 	ctx.info(`[${name}] Fastly dev server shut down`);
 }
 

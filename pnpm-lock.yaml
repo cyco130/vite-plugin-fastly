@@ -30,8 +30,8 @@ importers:
         specifier: ^20.19.27
         version: 20.19.31
       kill-em-all:
-        specifier: 0.0.2
-        version: 0.0.2
+        specifier: 0.0.3
+        version: 0.0.3
       puppeteer:
         specifier: ^24.34.0
         version: 24.36.1(typescript@5.9.3)
@@ -58,7 +58,7 @@ importers:
         specifier: ^7.3.1
         version: 7.3.1(@types/node@25.0.7)(lightningcss@1.31.1)(terser@5.44.1)(yaml@2.8.2)
       vite-plugin-fastly:
-        specifier: workspace:0.0.2
+        specifier: 0.0.2
         version: link:../../packages/vite-plugin-fastly
 
   examples/react-ssr:
@@ -92,7 +92,7 @@ importers:
         specifier: ^7.3.1
         version: 7.3.1(@types/node@25.0.7)(lightningcss@1.31.1)(terser@5.44.1)(yaml@2.8.2)
       vite-plugin-fastly:
-        specifier: workspace:0.0.2
+        specifier: 0.0.2
         version: link:../../packages/vite-plugin-fastly
 
   examples/server-only:
@@ -108,7 +108,7 @@ importers:
         specifier: ^7.3.1
         version: 7.3.1(@types/node@25.0.7)(lightningcss@1.31.1)(terser@5.44.1)(yaml@2.8.2)
       vite-plugin-fastly:
-        specifier: workspace:0.0.2
+        specifier: 0.0.2
         version: link:../../packages/vite-plugin-fastly
 
   packages/vite-plugin-fastly:
@@ -117,8 +117,8 @@ importers:
         specifier: ^1.23.2
         version: 1.23.2
       kill-em-all:
-        specifier: 0.0.2
-        version: 0.0.2
+        specifier: 0.0.3
+        version: 0.0.3
     devDependencies:
       "@cyco130/eslint-config":
         specifier: ^6.1.1
@@ -4400,10 +4400,10 @@ packages:
         integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==,
       }
 
-  kill-em-all@0.0.2:
+  kill-em-all@0.0.3:
     resolution:
       {
-        integrity: sha512-moO3mkfhBk5SkQvlkyWoGAeyl4dgeFb1vyBvNrBDdOXNfXTaC+2dDNmtrNgN3JtMBei9P63Z04SHkrf6X56VDg==,
+        integrity: sha512-jX5HJ35KprbV8LCIOmGizdAdndP1KeZd0H+l0St2Qtn4Qu6JpcKnhgkTImHzqiBiYTvTC1cm6Ei3ere7m1LjBg==,
       }
     hasBin: true
 
@@ -8702,7 +8702,7 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  kill-em-all@0.0.2: {}
+  kill-em-all@0.0.3: {}
 
   levn@0.4.1:
     dependencies:
