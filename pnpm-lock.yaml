@@ -117,8 +117,8 @@ importers:
         specifier: ^1.23.2
         version: 1.23.2
       kill-em-all:
-        specifier: 0.0.2
-        version: 0.0.2
+        specifier: 0.0.3
+        version: 0.0.3
     devDependencies:
       "@cyco130/eslint-config":
         specifier: ^6.1.1
@@ -4399,13 +4399,6 @@ packages:
       {
         integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==,
       }
-
-  kill-em-all@0.0.2:
-    resolution:
-      {
-        integrity: sha512-moO3mkfhBk5SkQvlkyWoGAeyl4dgeFb1vyBvNrBDdOXNfXTaC+2dDNmtrNgN3JtMBei9P63Z04SHkrf6X56VDg==,
-      }
-    hasBin: true
 
   kill-em-all@0.0.3:
     resolution:
@@ -8708,8 +8701,6 @@ snapshots:
   keyv@4.5.4:
     dependencies:
       json-buffer: 3.0.1
-
-  kill-em-all@0.0.2: {}
 
   kill-em-all@0.0.3: {}
 
