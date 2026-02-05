@@ -1,9 +1,9 @@
-import { describe, test, expect, beforeAll, afterAll } from "vitest";
+import { describe, test, beforeAll, afterAll } from "vitest";
 import puppeteer, { ElementHandle } from "puppeteer";
 import path from "path";
 import fs from "fs";
-import { spawn, ChildProcess } from "child_process";
-import { getRecursiveChildProcesses, killProcesses } from "kill-em-all";
+import { spawn } from "child_process";
+import { launchAndTest, type LaunchAndTestCleanupFunction } from "kill-em-all";
 
 const DEV_HOST = `http://localhost:5173`;
 const PREVIEW_HOST = `http://localhost:7676`;
@@ -49,7 +49,7 @@ describe.each(cases)(
 			example.toLowerCase(),
 		);
 
-		let pids: number[] = [];
+		let cleanup: LaunchAndTestCleanupFunction | undefined;
 
 		const host = env === "development" ? DEV_HOST : PREVIEW_HOST;
 
@@ -65,53 +65,11 @@ describe.each(cases)(
 				cwd: dir,
 			});
 
-			// eslint-disable-next-line no-async-promise-executor
-			await new Promise<void>(async (resolve, reject) => {
-				cp.on("spawn", () => {
-					if (cp.pid) {
-						pids.push(cp.pid);
-					}
-				});
-
-				cp!.on("error", (error) => {
-					reject(error);
-				});
-
-				cp!.on("exit", (code) => {
-					if (code !== 0) {
-						reject(new Error(`Process exited with code ${code}`));
-					}
-				});
-
-				for (;;) {
-					let doBreak = false;
-					await fetch(host)
-						.then(async (r) => {
-							if (r.status === 200) {
-								resolve();
-								doBreak = true;
-							}
-						})
-						.catch(() => {
-							// Ignore error
-						});
-
-					if (doBreak) {
-						break;
-					}
-
-					await new Promise((resolve) => setTimeout(resolve, 250));
-				}
-			}).catch((error) => {
-				console.error(error);
-				process.exit(1);
-			});
-
-			pids = await getRecursiveChildProcesses(cp.pid!);
+			cleanup = await launchAndTest(cp, host);
 		}, 60_000);
 
 		afterAll(async () => {
-			await killProcesses(pids, "SIGINT");
+			await cleanup?.();
 		});
 
 		test("renders page", async () => {

@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@types/node": "^20.19.27",
-    "kill-em-all": "0.0.2",
+    "kill-em-all": "0.0.3",
     "puppeteer": "^24.34.0",
     "typescript": "^5.9.3",
     "vitest": "^4.0.16"
