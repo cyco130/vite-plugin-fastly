@@ -3,7 +3,7 @@ import puppeteer, { ElementHandle } from "puppeteer";
 import path from "path";
 import fs from "fs";
 import { spawn, ChildProcess } from "child_process";
-import treeKill from "tree-kill-promise";
+import { getRecursiveChildProcesses, killProcesses } from "kill-em-all";
 
 const DEV_HOST = `http://localhost:5173`;
 const PREVIEW_HOST = `http://localhost:7676`;
@@ -49,7 +49,7 @@ describe.each(cases)(
 			example.toLowerCase(),
 		);
 
-		let cp: ChildProcess | undefined;
+		let pids: number[] = [];
 
 		const host = env === "development" ? DEV_HOST : PREVIEW_HOST;
 
@@ -59,7 +59,7 @@ describe.each(cases)(
 					? `pnpm run dev`
 					: `pnpm run build && pnpm run preview`;
 
-			cp = spawn(command, {
+			const cp = spawn(command, {
 				shell: true,
 				stdio: "inherit",
 				cwd: dir,
@@ -67,6 +67,12 @@ describe.each(cases)(
 
 			// eslint-disable-next-line no-async-promise-executor
 			await new Promise<void>(async (resolve, reject) => {
+				cp.on("spawn", () => {
+					if (cp.pid) {
+						pids.push(cp.pid);
+					}
+				});
+
 				cp!.on("error", (error) => {
 					reject(error);
 				});
@@ -100,23 +106,12 @@ describe.each(cases)(
 				console.error(error);
 				process.exit(1);
 			});
+
+			pids = await getRecursiveChildProcesses(cp.pid!);
 		}, 60_000);
 
 		afterAll(async () => {
-			if (!cp || cp.exitCode || !cp.pid) {
-				return;
-			}
-
-			await treeKill(cp.pid);
-
-			if (cp.exitCode || !cp.pid) {
-				return;
-			}
-
-			await new Promise((resolve, reject) => {
-				cp!.on("exit", resolve);
-				cp!.on("error", reject);
-			});
+			await killProcesses(pids, "SIGINT");
 		});
 
 		test("renders page", async () => {

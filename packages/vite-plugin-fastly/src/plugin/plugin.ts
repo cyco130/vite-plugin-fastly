@@ -3,7 +3,7 @@ import { createProxy, type ServerOptions } from "http-proxy-3";
 import type { IncomingMessage } from "node:http";
 import fs from "node:fs";
 import { ChildProcess, execSync, spawn } from "node:child_process";
-import treeKill from "tree-kill-promise";
+import { getRecursiveChildProcesses, killProcesses } from "kill-em-all";
 import exposeEnvironment from "./expose-environment";
 
 export interface FastlyPluginOptions {
@@ -56,7 +56,7 @@ export interface FastlyPluginOptions {
 }
 
 // Map of uniqueName to Fastly Dev Server child processes
-const fastlyProcesses = new Map<string, ChildProcess>();
+const fastlyProcesses = new Map<string, number[]>();
 
 export function fastly(options: FastlyPluginOptions = {}): Plugin[] {
 	const {
@@ -217,7 +217,7 @@ export function fastly(options: FastlyPluginOptions = {}): Plugin[] {
 
 				// Kill previous Fastly Dev Server process if any
 				fastlyProcessKilled = true;
-				await killProcessAndChildren(this, uniqueName);
+				await doKillProcesses(this, uniqueName);
 
 				const wasmFile = buildDevRunnerIfNecessary(
 					this,
@@ -232,12 +232,9 @@ export function fastly(options: FastlyPluginOptions = {}): Plugin[] {
 
 				this.info(`[${uniqueName}] Launching Fastly Dev Server with command:`);
 				this.info(`[${uniqueName}] ${launchCommand}`);
-				const fastlyDevServerProcess = spawn(launchCommand, {
-					shell: true,
-					stdio: "inherit",
-				});
+				const fastlyDevServerProcess = await spawnCommand(launchCommand);
 
-				fastlyProcesses.set(uniqueName, fastlyDevServerProcess);
+				fastlyProcesses.set(uniqueName, [fastlyDevServerProcess.pid!]);
 
 				// Wait until server is ready
 				await new Promise<void>((resolve, reject) => {
@@ -269,7 +266,15 @@ export function fastly(options: FastlyPluginOptions = {}): Plugin[] {
 							// Ignore errors, server is not ready yet
 						}
 					}, checkInterval);
+				}).catch(async (error) => {
+					await doKillProcesses(this, uniqueName);
+					throw error;
 				});
+
+				fastlyProcesses.set(
+					uniqueName,
+					await getRecursiveChildProcesses(fastlyDevServerProcess.pid!),
+				);
 
 				this.info(
 					`[${uniqueName}] Fastly Dev Server is running at http://${fastlyDevServerAddress}`,
@@ -314,7 +319,7 @@ export function fastly(options: FastlyPluginOptions = {}): Plugin[] {
 			async buildEnd() {
 				if (command === "build" || fastlyProcessKilled) return;
 				fastlyProcessKilled = true;
-				await killProcessAndChildren(this, uniqueName);
+				await doKillProcesses(this, uniqueName);
 			},
 
 			configureServer(server) {
@@ -498,7 +503,7 @@ function statOrNull(path: string): fs.Stats | null {
 	}
 }
 
-async function killProcessAndChildren(
+async function doKillProcesses(
 	ctx: {
 		info: (msg: string) => void;
 	},
@@ -509,16 +514,30 @@ async function killProcessAndChildren(
 
 	fastlyProcesses.delete(name);
 
-	const pid = proc.pid;
-	if (!pid || proc.exitCode) return;
+	ctx.info(`[${name}] Shutting down Fastly dev server`);
+	await killProcesses(proc, "SIGINT");
 
-	ctx.info(`\n[${name}] Shutting down Fastly dev server`);
+	ctx.info(`[${name}] Fastly dev server shut down`);
+}
 
-	await treeKill(pid, "SIGINT");
+async function spawnCommand(command: string): Promise<ChildProcess> {
+	const child = spawn(command, {
+		shell: true,
+		stdio: "inherit",
+	});
 
-	await new Promise<void>((resolve) => {
-		proc.on("exit", () => resolve());
-		proc.on("error", () => resolve());
+	return await new Promise((resolve, reject) => {
+		child.on("spawn", () => {
+			if (!child.pid) {
+				return reject(new Error("Failed to spawn process"));
+			}
+
+			resolve(child);
+		});
+
+		child.on("error", (err) => {
+			reject(err);
+		});
 	});
 }
 
@@ -529,7 +548,7 @@ async function killAll() {
 	const promises: Promise<void>[] = [];
 	for (const name of fastlyProcesses.keys()) {
 		promises.push(
-			killProcessAndChildren(
+			doKillProcesses(
 				{
 					info: (msg: string) => {
 						process.stdout.write(msg + "\n");
@@ -542,10 +561,14 @@ async function killAll() {
 	await Promise.all(promises);
 }
 
-process.on("SIGINT", async () => {
+function cleanupOnExit() {
 	if (!killAllInProgress) {
 		void killAll().finally(() => {
 			process.exit(0);
 		});
 	}
-});
+}
+
+process.on("SIGINT", cleanupOnExit);
+process.on("SIGTERM", cleanupOnExit);
+process.on("exit", cleanupOnExit);

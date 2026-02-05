@@ -6,7 +6,7 @@ import react from "@vitejs/plugin-react";
 export default (env: ConfigEnv) => {
 	// We have to create an empty KV store file for the local Fastly server
 	if (env.command === "serve") {
-		fs.mkdirSync("static-publisher");
+		fs.mkdirSync("static-publisher", { recursive: true });
 		fs.writeFileSync("static-publisher/kvstore.json", "{}", {
 			encoding: "utf-8",
 		});

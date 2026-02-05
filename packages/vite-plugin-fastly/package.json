@@ -53,10 +53,10 @@
     "publint": "^0.3.16",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "vite": "^7.3.1"
+    "vite": "7.3.1"
   },
   "dependencies": {
     "http-proxy-3": "^1.23.2",
-    "tree-kill-promise": "^5.0.0"
+    "kill-em-all": "0.0.2"
   }
 }

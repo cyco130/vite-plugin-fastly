@@ -17,5 +17,8 @@
     "lint-staged": "^16.2.7",
     "prettier": "^3.7.4",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "kill-em-all": "link:../kill-em-all/packages/kill-em-all"
   }
 }
