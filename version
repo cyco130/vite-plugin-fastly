@@ -12,3 +12,5 @@ echo -e ${WHITE}Updating dependency versions in examples${NC}
 pnpm -r --filter=./examples/* update --workspace --save-workspace-protocol=false $PROJECT_NAME
 sed -i.bak 's/workspace://g' ./examples/*/package.json
 rm ./examples/*/package.json.bak
+# Reinstall to update lockfile
+pnpm i
