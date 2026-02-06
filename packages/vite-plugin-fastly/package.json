@@ -45,12 +45,12 @@
     "vite": "7"
   },
   "devDependencies": {
-    "@cyco130/eslint-config": "^6.1.1",
+    "@cyco130/eslint-config": "^6.1.2",
     "@fastly/cli": "^13.3.0",
-    "@fastly/js-compute": "^3.38.2",
+    "@fastly/js-compute": "^3.39.0",
     "@types/node": "^25.0.7",
     "eslint": "^9.39.2",
-    "publint": "^0.3.16",
+    "publint": "^0.3.17",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
     "vite": "7.3.1"

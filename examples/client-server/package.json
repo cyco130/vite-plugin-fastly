@@ -9,8 +9,8 @@
     "deploy": "compute-js-static-publish publish-content && fastly compute pack -w ./dist/ssr/app.wasm && fastly compute deploy"
   },
   "devDependencies": {
-    "@fastly/compute-js-static-publish": "^7.0.4",
-    "@fastly/js-compute": "^3.38.2",
+    "@fastly/compute-js-static-publish": "^7.0.5",
+    "@fastly/js-compute": "^3.39.0",
     "vite": "^7.3.1",
     "vite-plugin-fastly": "0.0.3"
   },
