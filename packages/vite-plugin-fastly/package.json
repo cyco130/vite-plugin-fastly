@@ -47,7 +47,7 @@
   "devDependencies": {
     "@cyco130/eslint-config": "^6.1.2",
     "@fastly/cli": "^13.3.0",
-    "@fastly/js-compute": "^3.39.0",
+    "@fastly/js-compute": "^3.39.2",
     "@types/node": "^25.0.7",
     "eslint": "^9.39.2",
     "publint": "^0.3.17",
@@ -57,6 +57,6 @@
   },
   "dependencies": {
     "http-proxy-3": "^1.23.2",
-    "kill-em-all": "0.0.3"
+    "kill-em-all": "0.0.4"
   }
 }
