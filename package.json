@@ -6,11 +6,11 @@
     "build": "pnpm -r --filter \"./packages/*\" run build",
     "prepare": "husky install",
     "precommit": "lint-staged",
-    "format": "prettier --ignore-path .gitignore --ignore-unknown . '!pnpm-lock.yaml' --write",
+    "format": "prettier --ignore-path .gitignore --ignore-unknown . '!pnpm-lock.yaml' !'**/static-publisher/**' --write",
     "ci": "pnpm -r --stream run ci",
     "test": "pnpm run /^test:/",
     "test:packages": "pnpm -r --stream run test",
-    "test:format": "prettier --check --ignore-path .gitignore --ignore-unknown . '!pnpm-lock.yaml'"
+    "test:format": "prettier --check --ignore-path .gitignore --ignore-unknown . '!pnpm-lock.yaml' !'**/static-publisher/**'"
   },
   "devDependencies": {
     "husky": "^9.1.7",

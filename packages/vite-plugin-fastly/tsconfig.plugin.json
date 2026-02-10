@@ -1,7 +1,8 @@
 {
 	"compilerOptions": {
-		"composite": true,
+		"noEmit": true,
 
+		"allowJs": true,
 		"checkJs": true,
 		"forceConsistentCasingInFileNames": true,
 		"skipLibCheck": true,
@@ -11,17 +12,15 @@
 		"noUncheckedIndexedAccess": true,
 
 		"module": "preserve",
-		"moduleResolution": "bundler",
-		"noEmit": true,
 		"esModuleInterop": true,
 		"verbatimModuleSyntax": true,
 		"isolatedModules": true,
 		"moduleDetection": "force",
 		"resolveJsonModule": true,
+		"customConditions": ["import"],
 
-		"target": "es2020",
-		"lib": ["es2022"],
-		"customConditions": ["import"]
+		"target": "es2022",
+		"lib": ["es2022"]
 	},
 	"include": ["src/plugin/**/*"]
 }
