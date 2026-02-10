@@ -1,7 +1,8 @@
 {
 	"compilerOptions": {
-		"composite": true,
+		"noEmit": true,
 
+		"allowJs": true,
 		"checkJs": true,
 		"forceConsistentCasingInFileNames": true,
 		"skipLibCheck": true,
@@ -11,19 +12,15 @@
 		"noUncheckedIndexedAccess": true,
 
 		"module": "preserve",
-		"moduleResolution": "bundler",
-		"noEmit": true,
 		"esModuleInterop": true,
 		"verbatimModuleSyntax": true,
 		"isolatedModules": true,
 		"moduleDetection": "force",
 		"resolveJsonModule": true,
 
-		"target": "es2020",
+		"customConditions": ["import", "fastly"],
 		"lib": ["es2022"],
-
-		"types": ["@fastly/js-compute"],
-		"customConditions": ["import", "fastly"]
+		"types": ["@fastly/js-compute"]
 	},
 	"include": ["src/runner/**/*"]
 }
