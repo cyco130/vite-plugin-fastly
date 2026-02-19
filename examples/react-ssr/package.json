@@ -9,15 +9,15 @@
     "deploy": "compute-js-static-publish publish-content && fastly compute pack -w ./dist/ssr/app.wasm && fastly compute deploy"
   },
   "devDependencies": {
-    "@fastly/compute-js-static-publish": "^7.0.5",
-    "@fastly/js-compute": "^3.39.2",
+    "@fastly/compute-js-static-publish": "^7.0.6",
+    "@fastly/js-compute": "^3.40.0",
     "@vitejs/plugin-react": "^5.1.4",
     "vite": "^7.3.1",
     "vite-plugin-fastly": "0.0.3"
   },
   "dependencies": {
     "@fastly/cli": "^13.3.0",
-    "@types/react": "^19.2.13",
+    "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
