@@ -45,9 +45,9 @@
     "vite": "7"
   },
   "devDependencies": {
-    "@cyco130/eslint-config": "^6.1.2",
+    "@cyco130/eslint-config": "^6.2.0",
     "@fastly/cli": "^13.3.0",
-    "@fastly/js-compute": "^3.39.2",
+    "@fastly/js-compute": "^3.40.0",
     "@types/node": "^25.0.7",
     "eslint": "^9.39.2",
     "publint": "^0.3.17",
@@ -57,6 +57,6 @@
   },
   "dependencies": {
     "http-proxy-3": "^1.23.2",
-    "kill-em-all": "0.0.4"
+    "kill-em-all": "0.0.5"
   }
 }
