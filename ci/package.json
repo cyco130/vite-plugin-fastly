@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "ci": "vitest --reporter=verbose run"
+    "ci": "cross-env DEBUG=kill-em-all vitest --reporter=verbose run"
   },
   "dependencies": {
     "@types/node": "^20.19.33",
@@ -11,5 +11,8 @@
     "puppeteer": "^24.37.5",
     "typescript": "^5.9.3",
     "vitest": "^4.0.18"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0"
   }
 }
