@@ -1,20 +1,20 @@
 {
   "name": "vite-plugin-fastly-client-server-example",
-  "type": "module",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && compute-js-static-publish publish-content --local",
     "preview": "fastly compute serve --file ./dist/ssr/app.wasm",
     "deploy": "compute-js-static-publish publish-content && fastly compute pack -w ./dist/ssr/app.wasm && fastly compute deploy"
   },
+  "dependencies": {
+    "@fastly/cli": "^14.0.4"
+  },
   "devDependencies": {
     "@fastly/compute-js-static-publish": "^7.0.6",
     "@fastly/js-compute": "^3.40.1",
     "vite": "^7.3.1",
     "vite-plugin-fastly": "0.0.4"
-  },
-  "dependencies": {
-    "@fastly/cli": "^14.0.4"
   }
 }

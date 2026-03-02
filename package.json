@@ -6,19 +6,19 @@
     "build": "pnpm -r --filter \"./packages/*\" run build",
     "prepare": "husky install",
     "precommit": "lint-staged",
-    "format": "prettier --ignore-path .gitignore --ignore-unknown . '!pnpm-lock.yaml' !'**/static-publisher/**' --write",
+    "format": "oxfmt",
     "ci": "pnpm -r --stream run ci",
     "test": "pnpm run /^test:/",
     "test:packages": "pnpm -r --stream run test",
-    "test:format": "prettier --check --ignore-path .gitignore --ignore-unknown . '!pnpm-lock.yaml' !'**/static-publisher/**'"
+    "test:format": "oxfmt --check"
+  },
+  "dependencies": {
+    "kill-em-all": "link:../kill-em-all/packages/kill-em-all"
   },
   "devDependencies": {
     "husky": "^9.1.7",
     "lint-staged": "^16.3.1",
-    "prettier": "^3.8.1",
+    "oxfmt": "^0.36.0",
     "typescript": "^5.9.3"
-  },
-  "dependencies": {
-    "kill-em-all": "link:../kill-em-all/packages/kill-em-all"
   }
 }
