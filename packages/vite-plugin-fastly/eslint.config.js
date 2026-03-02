@@ -7,7 +7,7 @@ export default [
 		ignores: [
 			"dist/",
 			"node_modules/",
-			"tsup.config.ts",
+			"tsdown.config.ts",
 			"lint-staged.config.mjs",
 			"eslint.config.js",
 			"types.d.ts",

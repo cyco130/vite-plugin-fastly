@@ -40,8 +40,8 @@ export default (env: ConfigEnv) => {
 		builder: {
 			async buildApp(builder) {
 				await fs.promises.rm("dist", { recursive: true, force: true });
-				await builder.build(builder.environments.client);
-				await builder.build(builder.environments.ssr);
+				await builder.build(builder.environments.client!);
+				await builder.build(builder.environments.ssr!);
 			},
 		},
 		plugins: [react(), fastly(), resolveClientManifest()],
