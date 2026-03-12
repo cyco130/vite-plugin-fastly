@@ -1,3 +1,3 @@
 export default {
-	"*": "oxfmt",
+	"*": "prettier --ignore-unknown --write",
 };
