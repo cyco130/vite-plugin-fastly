@@ -45,13 +45,13 @@
     "kill-em-all": "0.0.5"
   },
   "devDependencies": {
-    "@cyco130/eslint-config": "^6.2.2",
+    "@cyco130/eslint-config": "^6.2.3",
     "@fastly/cli": "^14.0.4",
     "@fastly/js-compute": "^3.40.1",
     "@types/node": "^25.0.7",
-    "eslint": "^10.0.2",
+    "eslint": "^10.0.3",
     "publint": "^0.3.18",
-    "tsdown": "0.21.0-beta.2",
+    "tsdown": "0.21.2",
     "typescript": "^5.9.3",
     "vite": "7.3.1"
   },
