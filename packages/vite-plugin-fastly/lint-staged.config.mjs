@@ -3,5 +3,5 @@ export default {
 		() => "tsc -p tsconfig.json --noEmit",
 		"eslint --max-warnings 0 --ignore-pattern dist --no-warn-ignored",
 	],
-	"*": "oxfmt",
+	"*": "prettier --ignore-unknown --write",
 };
