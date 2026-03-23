@@ -20,7 +20,7 @@ Check the starter examples:
 
 During development, `vite-plugin-fastly` works by launching a remote module runner via `fastly compute serve` that communicates with the Vite development server to transform source files on-the-fly and run them via a Vite [`ModuleRunner`](https://vite.dev/guide/api-environment-runtimes#modulerunner). This runner, in turn, loads your entry module and passes incoming requests to it.
 
-The plugin also adds a middleware to the Vite development server that proxies requests to the remote module runner. This proxy is placed _before_ Vite's own middlewares if you don't configure a client entry point via `environments.client.build.rollupOptions.input`, or _after_ if you do. When placed before, the setup essentially disables Vite's client-side features.
+The plugin also adds a middleware to the Vite development server that proxies requests to the remote module runner. This proxy is placed _before_ Vite's own middlewares if you don't configure a client entry point via `environments.client.build.rolldownOptions.input`, or _after_ if you do. When placed before, the setup essentially disables Vite's client-side features.
 
 ## Limitations
 

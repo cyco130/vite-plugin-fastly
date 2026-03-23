@@ -22,7 +22,7 @@ export default (env: ConfigEnv) => {
 					// Enable manifest generation for client build.
 					manifest: true,
 					outDir: "dist/client",
-					rollupOptions: {
+					rolldownOptions: {
 						input: "src/entry.client.ts",
 					},
 				},
@@ -30,7 +30,7 @@ export default (env: ConfigEnv) => {
 			ssr: {
 				build: {
 					outDir: "dist/ssr",
-					rollupOptions: {
+					rolldownOptions: {
 						input: "src/entry.fastly.ts",
 					},
 				},
