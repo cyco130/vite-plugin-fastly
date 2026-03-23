@@ -9,7 +9,7 @@
     "deploy": "compute-js-static-publish publish-content && fastly compute pack -w ./dist/ssr/app.wasm && fastly compute deploy"
   },
   "dependencies": {
-    "@fastly/cli": "^14.0.4"
+    "@fastly/cli": "^14.1.1"
   },
   "devDependencies": {
     "@fastly/compute-js-static-publish": "^7.0.6",

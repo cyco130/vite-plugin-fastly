@@ -9,7 +9,7 @@
     "deploy": "fastly compute pack -w ./dist/app.wasm && fastly compute deploy"
   },
   "dependencies": {
-    "@fastly/cli": "^14.0.4"
+    "@fastly/cli": "^14.1.1"
   },
   "devDependencies": {
     "@fastly/js-compute": "^3.40.1",
