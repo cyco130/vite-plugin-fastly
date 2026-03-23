@@ -1,4 +1,10 @@
-import type { ConfigPluginContext, Connect, HttpServer, Plugin } from "vite";
+import {
+	createFetchableDevEnvironment,
+	type ConfigPluginContext,
+	type Connect,
+	type HttpServer,
+	type Plugin,
+} from "vite";
 import { createProxy, type ServerOptions } from "http-proxy-3";
 import type { IncomingMessage } from "node:http";
 import fs from "node:fs";
@@ -82,9 +88,14 @@ export function fastly(options: FastlyPluginOptions = {}): Plugin[] {
 			name: uniqueName,
 
 			config(_, env) {
+				const hasRoldown = this.meta.rolldownVersion !== undefined;
+
 				return {
 					environments: {
 						[viteEnvironmentName]: {
+							define: {
+								"process.env.NODE_ENV": JSON.stringify(env.mode),
+							},
 							optimizeDeps: {
 								noDiscovery: false,
 								exclude: [
@@ -108,13 +119,19 @@ export function fastly(options: FastlyPluginOptions = {}): Plugin[] {
 									"fastly:secret-store",
 									"fastly:websocket",
 								],
-								esbuildOptions: {
+								rolldownOptions: {
 									platform: "neutral",
-									minify: true,
-									define: {
-										"process.env.NODE_ENV": JSON.stringify(env.mode),
-									},
+									treeshake: true,
 								},
+								esbuildOptions: hasRoldown
+									? undefined
+									: {
+											platform: "neutral",
+											minify: true,
+											define: {
+												"process.env.NODE_ENV": JSON.stringify(env.mode),
+											},
+										},
 							},
 							resolve: {
 								builtins: [/^fastly:/],
@@ -122,13 +139,35 @@ export function fastly(options: FastlyPluginOptions = {}): Plugin[] {
 								conditions: ["fastly", "workerd"],
 							},
 							build: {
-								rollupOptions: {
-									output: {
-										inlineDynamicImports: true,
-									},
+								rolldownOptions: hasRoldown
+									? {
+											platform: "neutral",
+											output: {
+												codeSplitting: false,
+											},
+										}
+									: undefined,
+								rollupOptions: hasRoldown
+									? undefined
+									: {
+											platform: "neutral",
+											output: {
+												inlineDynamicImports: true,
+											},
+										},
+							},
+							dev: {
+								createEnvironment(name, config) {
+									return createFetchableDevEnvironment(name, config, {
+										hot: false,
+										handleRequest(request) {
+											// TODO: Create a full fetchable environment
+											void request;
+											throw new Error("Not implemented");
+										},
+									});
 								},
 							},
-							dev: {},
 						},
 					},
 				};
@@ -179,8 +218,13 @@ export function fastly(options: FastlyPluginOptions = {}): Plugin[] {
 					process.exit(1);
 				}
 
+				const hasRoldown = this.meta.rolldownVersion !== undefined;
+				const optionsKey = hasRoldown
+					? ("rolldownOptions" as const)
+					: ("rollupOptions" as const);
+
 				const clientInput =
-					config.environments.client?.build.rollupOptions.input;
+					config.environments.client?.build?.[optionsKey]?.input;
 				if (typeof clientInput === "string") {
 					clientConfigured = true;
 				} else if (Array.isArray(clientInput) && clientInput.length > 0) {
@@ -199,7 +243,12 @@ export function fastly(options: FastlyPluginOptions = {}): Plugin[] {
 					return;
 				}
 
-				const input = config.build?.rollupOptions?.input;
+				const hasRoldown = this.meta.rolldownVersion !== undefined;
+				const optionsKey = hasRoldown
+					? ("rolldownOptions" as const)
+					: ("rollupOptions" as const);
+
+				const input = config.build?.[optionsKey]?.input;
 				if (typeof input === "string") {
 					handlerEntry = input;
 				} else if (Array.isArray(input)) {
@@ -211,7 +260,7 @@ export function fastly(options: FastlyPluginOptions = {}): Plugin[] {
 
 				if (!handlerEntry) {
 					return this.error(
-						`[${uniqueName}] No entry point found in Rollup options. Please specify an input in environments.${viteEnvironmentName}.build.rollupOptions.input.`,
+						`[${uniqueName}] No entry point found in ${optionsKey}. Please specify an input in environments.${viteEnvironmentName}.build.${optionsKey}.input.`,
 					);
 				}
 

@@ -21,7 +21,7 @@ export default (env: ConfigEnv) => {
 					// Enable manifest generation for client build.
 					manifest: true,
 					outDir: "dist/client",
-					rollupOptions: {
+					rolldownOptions: {
 						input: "src/entry.client.ts",
 					},
 				},
@@ -29,7 +29,7 @@ export default (env: ConfigEnv) => {
 			ssr: {
 				build: {
 					outDir: "dist/ssr",
-					rollupOptions: {
+					rolldownOptions: {
 						input: "src/entry.fastly.ts",
 					},
 				},
@@ -39,8 +39,8 @@ export default (env: ConfigEnv) => {
 		builder: {
 			async buildApp(builder) {
 				await fs.promises.rm("dist", { recursive: true, force: true });
-				await builder.build(builder.environments.client);
-				await builder.build(builder.environments.ssr);
+				await builder.build(builder.environments.client!);
+				await builder.build(builder.environments.ssr!);
 			},
 		},
 		plugins: [fastly(), resolveClientManifest()],

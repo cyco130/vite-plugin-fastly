@@ -4,7 +4,7 @@ This example demonstrates how to use the `vite-plugin-fastly` plugin in a full-s
 
 The example implements, in essence, a toy React metaframework. A real framework would include more features like a more practical router, injection of module preload and CSS links into the document head, a data loading mechanism, error handling, etc., but this example covers the basics of SSR with React and Fastly.
 
-When a client entry point is specified via `environments.client.build.rollupOptions.input` in the Vite configuration, the plugin puts the Fastly server proxy _after_ the Vite's client assets server in the middleware stack. This allows the server to handle API requests while still serving client assets efficiently.
+When a client entry point is specified via `environments.client.build.rolldownOptions.input` in the Vite configuration, the plugin puts the Fastly server proxy _after_ the Vite's client assets server in the middleware stack. This allows the server to handle API requests while still serving client assets efficiently.
 
 In the production build, your server-side code will need access to the client build's manifest file to correctly map entry module names into generated asset file names, e.g. `/entry.client.ts` into something like `/assets/entry.client-DB3Pp835.js`. The Vite config includes a small custom plugin to resolve the client manifest file path during the SSR build.
 

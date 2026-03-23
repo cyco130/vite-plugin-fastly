@@ -8,7 +8,7 @@ export default {
 	environments: {
 		ssr: {
 			build: {
-				rollupOptions: {
+				rolldownOptions: {
 					input: "src/entry.fastly.ts",
 				},
 			},
@@ -17,7 +17,7 @@ export default {
 	// Build only the SSR environment.
 	builder: {
 		async buildApp(builder) {
-			await builder.build(builder.environments.ssr);
+			await builder.build(builder.environments.ssr!);
 		},
 	},
 	// Add the Fastly plugin.

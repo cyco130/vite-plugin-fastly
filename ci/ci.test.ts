@@ -63,6 +63,10 @@ describe.each(cases)(
 				shell: true,
 				stdio: "inherit",
 				cwd: dir,
+				env: {
+					...process.env,
+					NODE_ENV: env === "development" ? "development" : "production",
+				},
 			});
 
 			cleanup = await launchAndTest(cp, host);
