@@ -18,7 +18,7 @@
   "devDependencies": {
     "@fastly/compute-js-static-publish": "^7.0.6",
     "@fastly/js-compute": "^3.40.1",
-    "@vitejs/plugin-react": "^5.2.0",
+    "@vitejs/plugin-react": "^6.0.1",
     "vite": "^7.3.1",
     "vite-plugin-fastly": "0.0.4"
   }
