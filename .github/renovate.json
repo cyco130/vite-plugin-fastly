@@ -11,6 +11,10 @@
 	"rangeStrategy": "bump",
 	"packageRules": [
 		{
+			"matchManagers": ["github-actions"],
+			"rangeStrategy": "replace"
+		},
+		{
 			"matchDepTypes": ["peerDependencies"],
 			"enabled": false
 		},
