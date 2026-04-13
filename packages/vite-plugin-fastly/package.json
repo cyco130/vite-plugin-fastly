@@ -47,13 +47,13 @@
   "devDependencies": {
     "@cyco130/eslint-config": "^7.0.1",
     "@fastly/cli": "^14.2.0",
-    "@fastly/js-compute": "^3.41.0",
+    "@fastly/js-compute": "^3.41.1",
     "@types/node": "^25.0.7",
     "eslint": "^10.2.0",
     "publint": "^0.3.18",
-    "tsdown": "^0.21.7",
+    "tsdown": "^0.21.8",
     "typescript": "^6.0.2",
-    "vite": "^8.0.7"
+    "vite": "^8.0.8"
   },
   "peerDependencies": {
     "@fastly/js-compute": "3",
