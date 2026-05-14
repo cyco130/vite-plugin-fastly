@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "pnpm -r --parallel --filter \"./packages/*\" run dev",
     "build": "pnpm -r --filter \"./packages/*\" run build",
-    "prepare": "husky install",
+    "prepare": "husky",
     "precommit": "lint-staged",
     "format": "prettier --write .",
     "ci": "pnpm -r --stream run ci",
@@ -14,8 +14,8 @@
   },
   "devDependencies": {
     "husky": "^9.1.7",
-    "lint-staged": "^16.4.0",
-    "prettier": "^3.8.2",
-    "typescript": "^6.0.2"
+    "lint-staged": "^17.0.4",
+    "prettier": "^3.8.3",
+    "typescript": "^6.0.3"
   }
 }
