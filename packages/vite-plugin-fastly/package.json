@@ -49,11 +49,11 @@
   },
   "devDependencies": {
     "@cyco130/eslint-config": "^9.0.0",
-    "@fastly/cli": "^15.0.0",
+    "@fastly/cli": "^15.1.0",
     "@fastly/js-compute": "^3.42.0",
     "@types/node": "^22.19.19",
     "eslint": "^10.3.0",
-    "publint": "^0.3.20",
+    "publint": "^0.3.21",
     "tsdown": "^0.22.0",
     "typescript": "^6.0.3",
     "vite": "^8.0.12"
