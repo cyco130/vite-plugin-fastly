@@ -20,6 +20,10 @@ defaults:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+    env:
+      # Skip puppeteer's chrome download in CI and point it at the
+      # runner's pre-installed Chrome via channel: "chrome" in ci.test.ts.
+      PUPPETEER_SKIP_DOWNLOAD: "true"
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
