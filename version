@@ -13,4 +13,4 @@ pnpm -r --filter=./examples/* update --workspace --save-workspace-protocol=false
 sed -i.bak 's/workspace://g' ./examples/*/package.json
 rm ./examples/*/package.json.bak
 # Reinstall to update lockfile
-pnpm i
+pnpm i --no-frozen-lockfile
