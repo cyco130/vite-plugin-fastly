@@ -14,6 +14,6 @@
   "devDependencies": {
     "@fastly/js-compute": "^3.42.0",
     "vite": "^8.0.12",
-    "vite-plugin-fastly": "0.1.0"
+    "vite-plugin-fastly": "0.2.0"
   }
 }
