@@ -17,10 +17,12 @@
 		"isolatedModules": true,
 		"moduleDetection": "force",
 		"resolveJsonModule": true,
+		"allowImportingTsExtensions": true,
 		"customConditions": ["import"],
 
 		"target": "es2022",
 		"lib": ["es2022"]
 	},
-	"include": ["src/plugin/**/*"]
+	"include": ["src/plugin/**/*"],
+	"exclude": ["node_modules", "dist"]
 }

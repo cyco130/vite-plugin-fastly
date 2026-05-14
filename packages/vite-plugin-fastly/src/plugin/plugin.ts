@@ -10,7 +10,7 @@ import type { IncomingMessage } from "node:http";
 import fs from "node:fs";
 import { ChildProcess, execSync, spawn } from "node:child_process";
 import { launchAndTest, type LaunchAndTestCleanupFunction } from "kill-em-all";
-import exposeEnvironment from "./expose-environment";
+import exposeEnvironment from "./expose-environment.ts";
 
 export interface FastlyPluginOptions {
 	/**

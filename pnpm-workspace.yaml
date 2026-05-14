@@ -1,9 +1,13 @@
+strictPeerDependencies: false
+sideEffectsCache: false
+linkWorkspacePackages: true
+
 packages:
   - packages/*
   - examples/*
   - ci
 
-onlyBuiltDependencies:
-  - esbuild
-  - puppeteer
-  - unrs-resolver
+allowBuilds:
+  esbuild: true
+  puppeteer: true
+  unrs-resolver: true

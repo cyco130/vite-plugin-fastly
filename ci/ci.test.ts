@@ -10,6 +10,9 @@ const PREVIEW_HOST = `http://localhost:7676`;
 
 const browser = await puppeteer.launch({
 	headless: true,
+	// In CI we skip puppeteer's chrome download (see ci.yml) and use the
+	// runner's pre-installed Chrome.
+	...(process.env.CI ? { channel: "chrome" as const } : {}),
 	defaultViewport: { width: 1200, height: 800 },
 });
 
