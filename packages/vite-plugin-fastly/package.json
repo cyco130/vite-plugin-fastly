@@ -45,18 +45,18 @@
   },
   "dependencies": {
     "http-proxy-3": "^1.23.2",
-    "kill-em-all": "0.0.5"
+    "kill-em-all": "0.1.0"
   },
   "devDependencies": {
     "@cyco130/eslint-config": "^9.0.0",
-    "@fastly/cli": "^14.2.0",
-    "@fastly/js-compute": "^3.41.1",
+    "@fastly/cli": "^15.0.0",
+    "@fastly/js-compute": "^3.42.0",
     "@types/node": "^22.19.19",
     "eslint": "^10.3.0",
     "publint": "^0.3.20",
     "tsdown": "^0.22.0",
     "typescript": "^6.0.3",
-    "vite": "^8.0.8"
+    "vite": "^8.0.12"
   },
   "peerDependencies": {
     "@fastly/js-compute": "3",
