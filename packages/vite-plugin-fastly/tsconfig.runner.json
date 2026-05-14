@@ -17,10 +17,12 @@
 		"isolatedModules": true,
 		"moduleDetection": "force",
 		"resolveJsonModule": true,
+		"allowImportingTsExtensions": true,
 
 		"customConditions": ["import", "fastly"],
 		"lib": ["es2022"],
 		"types": ["@fastly/js-compute"]
 	},
-	"include": ["src/runner/**/*"]
+	"include": ["src/runner/**/*"],
+	"exclude": ["node_modules", "dist"]
 }
