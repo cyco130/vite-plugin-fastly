@@ -10,16 +10,16 @@
   },
   "dependencies": {
     "@fastly/cli": "^15.1.0",
-    "@types/react": "^19.2.14",
+    "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },
   "devDependencies": {
     "@fastly/compute-js-static-publish": "^7.0.6",
-    "@fastly/js-compute": "^3.42.0",
-    "@vitejs/plugin-react": "^6.0.1",
-    "vite": "^8.0.12",
+    "@fastly/js-compute": "^3.42.1",
+    "@vitejs/plugin-react": "^6.0.2",
+    "vite": "^8.0.13",
     "vite-plugin-fastly": "0.2.0"
   }
 }
