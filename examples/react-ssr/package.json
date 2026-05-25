@@ -19,7 +19,7 @@
     "@fastly/compute-js-static-publish": "^7.0.6",
     "@fastly/js-compute": "^3.42.1",
     "@vitejs/plugin-react": "^6.0.2",
-    "vite": "^8.0.13",
+    "vite": "^8.0.14",
     "vite-plugin-fastly": "0.2.0"
   }
 }
