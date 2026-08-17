@@ -49,7 +49,7 @@
   },
   "devDependencies": {
     "@cyco130/eslint-config": "^9.0.2",
-    "@fastly/cli": "^15.1.0",
+    "@fastly/cli": "^16.0.0",
     "@fastly/js-compute": "^3.42.1",
     "@types/node": "^22.19.20",
     "eslint": "^10.4.1",
