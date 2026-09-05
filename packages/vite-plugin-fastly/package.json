@@ -49,14 +49,14 @@
   },
   "devDependencies": {
     "@cyco130/eslint-config": "^9.0.2",
-    "@fastly/cli": "^15.1.0",
-    "@fastly/js-compute": "^3.42.1",
-    "@types/node": "^22.19.20",
-    "eslint": "^10.4.1",
-    "publint": "^0.3.21",
-    "tsdown": "^0.22.2",
+    "@fastly/cli": "^15.6.0",
+    "@fastly/js-compute": "^3.45.0",
+    "@types/node": "^22.20.1",
+    "eslint": "^10.10.0",
+    "publint": "^0.3.24",
+    "tsdown": "^0.23.0",
     "typescript": "^6.0.3",
-    "vite": "^8.0.16"
+    "vite": "^8.2.2"
   },
   "peerDependencies": {
     "@fastly/js-compute": "3",

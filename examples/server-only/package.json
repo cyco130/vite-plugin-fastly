@@ -9,11 +9,11 @@
     "deploy": "fastly compute pack -w ./dist/app.wasm && fastly compute deploy"
   },
   "dependencies": {
-    "@fastly/cli": "^15.1.0"
+    "@fastly/cli": "^15.6.0"
   },
   "devDependencies": {
-    "@fastly/js-compute": "^3.42.1",
-    "vite": "^8.0.16",
+    "@fastly/js-compute": "^3.45.0",
+    "vite": "^8.2.2",
     "vite-plugin-fastly": "0.2.0"
   }
 }
