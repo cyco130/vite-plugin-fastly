@@ -12,7 +12,7 @@
     "@fastly/cli": "^15.1.0"
   },
   "devDependencies": {
-    "@fastly/js-compute": "^3.42.1",
+    "@fastly/js-compute": "^4.0.1",
     "vite": "^8.0.16",
     "vite-plugin-fastly": "0.2.0"
   }
